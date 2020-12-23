@@ -23,7 +23,9 @@ const Layout = ({ children }) => {
           </Link>
           <div className="flex items-center">
             <p className="mr-2">
-              Hey {identity.user?.user_metadata?.full_name?.split(' ')[0] || 'there'}!
+              {identity.provisionalUser ? `CONFIRM EMAIL`
+                : `Hey ${identity.user?.user_metadata?.full_name?.split(' ')[0] || 'there'}!`
+              }
             </p>
             {!(identity.user || identity.provisionalUser) &&
               <Link

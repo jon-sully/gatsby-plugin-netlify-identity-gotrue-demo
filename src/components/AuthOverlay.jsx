@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
 
 import { useIdentityContext } from 'react-netlify-identity-gotrue'
@@ -10,6 +10,15 @@ const AuthOverlay = () => {
   const { register, handleSubmit, errors } = useForm()
   const [formError, setFormError] = useState()
   const [formProcessing, setFormProcessing] = useState(false)
+  const [forceShowOverlay, setForceShowOverlay] = useState(false)
+
+  useEffect(() => {
+    if (identity.provisionalUser) {
+      setForceShowOverlay('Please check your email for an account confirmation email!')
+      setTimeout(() => setForceShowOverlay(false), 5000)
+    }
+  }, [identity.provisionalUser])
+
   const onSubmit = async (data) => {
     setFormProcessing(true)
     setFormError()
@@ -19,17 +28,17 @@ const AuthOverlay = () => {
 
     setFormProcessing(false)
   }
-
+  
   return (
     <>
-      {identity.urlToken &&
+      {(identity.urlToken || forceShowOverlay) &&
         <div className="w-full h-full fixed block top-0 left-0 bg-gray-200 bg-opacity-75 z-50 flex justify-center items-center">
           <div className="w-full p-4 max-w-xs opacity-100 bg-white shadow-xl rounded-lg">
 
-            {identity.urlToken.type === "confirmation" &&
+          {identity.urlToken?.type === "confirmation" &&
               <p>Confirming User...</p>
             }
-            {identity.urlToken.type === "email_change" && (
+          {identity.urlToken?.type === "email_change" && (
               identity.user
                 ? <p>Changing Email...</p>
                 : <>
@@ -37,7 +46,10 @@ const AuthOverlay = () => {
                   <LoginForm />
                 </>
             )}
-            {(identity.urlToken.type === "recovery" || identity.urlToken.type === "invite") &&
+          {forceShowOverlay &&
+            <p>{forceShowOverlay}</p>
+          }
+          {(identity.urlToken?.type === "recovery" || identity.urlToken?.type === "invite") &&
               <>
                 {identity.urlToken.type === "recovery" && <h2>Reset Password</h2>}
                 {identity.urlToken.type === "invite" &&
