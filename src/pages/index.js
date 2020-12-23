@@ -35,6 +35,13 @@ export default () => {
               Feel free to sign up for a user account and play around. Nothing on this demo site
               is tracked or monitored, and no emails are retained beyond Netlify Identity.
             </p>
+            <p className="px-4 mt-8 text-xl text-gray-700 sm:mt-8">
+              This site fully implements Netlify Identity - creating new users, exposing workflow steps to complete
+              registrations, implementing recovery emails and invite tokens, and exposing important data-points in
+              React. <code className="text-pink-800">gatsby-plugin-netlify-identity-gotrue</code> is a Gatsby-specific
+              wrapper for <code className="text-pink-800">react-netlify-identity-gotrue</code>, which is written exclusively
+              in React (Hooks) and carries <em>no</em> dependencies.
+            </p>
             {identity.user &&
               <div className="pt-8 flex justify-around">
                 {!identity.user.app_metadata?.roles?.includes('member') &&
