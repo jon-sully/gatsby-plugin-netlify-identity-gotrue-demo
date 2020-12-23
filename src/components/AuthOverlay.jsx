@@ -15,7 +15,7 @@ const AuthOverlay = () => {
   useEffect(() => {
     if (identity.provisionalUser) {
       setForceShowOverlay('Please check your email for an account confirmation email!')
-      setTimeout(() => setForceShowOverlay(false), 5000)
+      setTimeout(() => setForceShowOverlay(false), 50000)
     }
   }, [identity.provisionalUser])
 
