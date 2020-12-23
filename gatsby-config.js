@@ -5,9 +5,9 @@ const { theme } = resolveConfig(tailwindConfig)
 
 module.exports = {
   siteMetadata: {
-    title: "Gatsby Starter Tailwind CSS",
-    author: "Melanie Nolan",
-    description: "A Gatsby starter to set you up with Tailwind CSS",
+    title: "Gatsby Plugin Netlify Identity GoTrue Demo",
+    author: "Jon Sullivan",
+    description: "Netlify Identity + Gatsby has never been easier",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -28,5 +28,11 @@ module.exports = {
         postCssPlugins: [require("tailwindcss"), require("autoprefixer")],
       },
     },
+    {
+      resolve: 'gatsby-plugin-netlify-identity-gotrue',
+      options: {
+        url: 'https://gpnig-demo.jonsully.net'
+      }
+    }
   ],
 }
