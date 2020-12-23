@@ -10,12 +10,13 @@ const AuthOverlay = () => {
   const { register, handleSubmit, errors } = useForm()
   const [formError, setFormError] = useState()
   const [formProcessing, setFormProcessing] = useState(false)
-  const [forceShowOverlay, setForceShowOverlay] = useState(false)
+  // const [forceShowOverlay, setForceShowOverlay] = useState(false)
+  const [forceShowOverlay, setForceShowOverlay] = useState("we're having issues with styles!")
 
   useEffect(() => {
     if (identity.provisionalUser) {
       setForceShowOverlay('Please check your email for an account confirmation email!')
-      setTimeout(() => setForceShowOverlay(false), 50000)
+      setTimeout(() => setForceShowOverlay(false), 5000)
     }
   }, [identity.provisionalUser])
 
