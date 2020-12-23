@@ -31,7 +31,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-netlify-identity-gotrue',
       options: {
-        url: 'https://gpnig-demo.jonsully.net'
+        url: 'https://gatsby-id-demo.jonsully.net'
       }
     }
   ],

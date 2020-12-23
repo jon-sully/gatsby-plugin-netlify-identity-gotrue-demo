@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useIdentityContext } from 'react-netlify-identity-gotrue'
 import { useForm } from "react-hook-form";
 import { navigate, Link } from 'gatsby';
@@ -10,6 +10,13 @@ export default function LoginForm({ navigateTarget }) {
   const { register, handleSubmit, errors } = useForm()
   const [formError, setFormError] = useState(false)
   const [loggingIn, setLoggingIn] = useState(false)
+
+  // When cold-loading a PrivateContent page, the user can get redirected to
+  // /login, but once the User hydrates from LocalStorage, we want to send them
+  // back ASAP
+  useEffect(() => {
+    navigateTarget && identity.user && navigate(navigateTarget)
+  }, [navigateTarget, identity.user, navigate])
 
   const onSubmit = async (data) => {
     setLoggingIn(true)

@@ -36,7 +36,7 @@ export default () => {
               is tracked or monitored, and no emails are retained beyond Netlify Identity.
             </p>
             {identity.user &&
-              <div className="flex justify-between">
+              <div className="pt-8 flex justify-around">
                 {!identity.user.app_metadata?.roles?.includes('member') &&
                   <button
                     className={`bg-blue-500 text-white p-2 m-2 rounded text-m font-bold ${processing && 'opacity-50'}`}

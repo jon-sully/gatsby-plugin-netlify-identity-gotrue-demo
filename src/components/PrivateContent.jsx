@@ -33,10 +33,15 @@ const Unauthorized = ({ callbackPath }) => {
   return (
     callbackPath
       ? <> </>
-      : <div>
-        <p>Unauthorized</p>
-        <p>You may not view this content</p>
-      </div>
+      : <main className="max-w-2xl flex-grow mx-auto flex flex-col justify-around">
+        <div className="sm:flex sm:flex-row-reverse sm:items-center">
+          <div className="sm:px-2">
+            <h1 className="px-4 pt-5 text-2xl text-left text-teal-500 font-bold sm:text-3xl">
+              Unauthorized
+              </h1>
+            </div>
+        </div>
+      </main>
   )
 }
 

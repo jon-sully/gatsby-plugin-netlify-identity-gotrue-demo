@@ -1,38 +1,60 @@
 import React from "react"
 import { Link } from 'gatsby'
+import { useIdentityContext } from 'react-netlify-identity-gotrue'
+
 import SEO from "./SEO"
 import AuthOverlay from './AuthOverlay'
 
 const Layout = ({ children }) => {
+  const identity = useIdentityContext()
+
   return (
     <>
       <SEO />
       <AuthOverlay />
       <div className="flex flex-col min-h-screen bg-gray-200">
         <header className="p-4 bg-teal-500 text-white font-semibold flex justify-between">
-          <h1>gatsby-plugin-netlify-identity-gotrue Demo</h1>
+          <Link
+            to="/"
+          >
+            <h1 className="my-auto">
+              gatsby-plugin-netlify-identity-gotrue Demo
+            </h1>
+          </Link>
           <div className="flex items-center">
             <p className="mr-2">
-              Hey there!
+              Hey {identity.user?.user_metadata?.full_name?.split(' ')[0] || 'there'}!
             </p>
-            <Link
-              className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
-              to="/sign-up"
-            >
-              Sign Up
-            </Link>
-            <Link
-              className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
-              to="/my-account"
-            >
-              My Account
-            </Link>
-            <Link
-              className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
-              to="/login"
-            >
-              Log In
-            </Link>
+            {!(identity.user || identity.provisionalUser) &&
+              <Link
+                className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
+                to="/sign-up"
+              >
+                Sign Up
+              </Link>
+            }
+            {identity.user ?
+              <>
+                <Link
+                  className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
+                  to="/my-account"
+                >
+                  My Account
+                </Link>
+                <button
+                  className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
+                  onClick={identity.logout}
+                >
+                  Log Out
+                </button>
+              </>
+              : <Link
+                className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
+                to="/login"
+              >
+                Log In
+              </Link>
+            }
           </div>
         </header>
         <header className="p-4 bg-red-300 text-white font-semibold flex justify-start">
