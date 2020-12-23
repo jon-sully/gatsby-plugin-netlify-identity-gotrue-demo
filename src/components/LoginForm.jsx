@@ -16,7 +16,7 @@ export default function LoginForm({ navigateTarget }) {
   // back ASAP
   useEffect(() => {
     navigateTarget && identity.user && navigate(navigateTarget)
-  }, [navigateTarget, identity.user, navigate])
+  }, [navigateTarget, identity.user])
 
   const onSubmit = async (data) => {
     setLoggingIn(true)
