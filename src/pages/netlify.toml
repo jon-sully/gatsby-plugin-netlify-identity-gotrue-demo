@@ -3,5 +3,10 @@
   publish = "public"
   functions = "serverless"
 
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
