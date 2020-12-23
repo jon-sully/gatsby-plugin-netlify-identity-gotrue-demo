@@ -14,8 +14,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "Gatsby Starter Tailwind CSS",
-        short_name: "Gatsby Starter Tailwind CSS",
+        name: "Gatsby Plugin Netlify Identity GoTrue Demo",
+        short_name: "Gatsby-Id-Demo",
         start_url: "/",
         background_color: theme.colors.white,
         theme_color: theme.colors.teal[500],
