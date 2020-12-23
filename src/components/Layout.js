@@ -64,7 +64,7 @@ const Layout = ({ children }) => {
           >
             Public Homepage
           </Link>
-          {identity.user.app_metadata?.roles?.includes('member') &&
+          {identity.user?.app_metadata?.roles?.includes('member') &&
             <Link
               className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-green-500 rounded shadow ripple hover:shadow-lg hover:bg-green-600 focus:outline-none"
               to="/members"
@@ -72,7 +72,7 @@ const Layout = ({ children }) => {
               Members Dashboard
             </Link>
           }
-          {identity.user.app_metadata?.roles?.includes('admin') &&
+          {identity.user?.app_metadata?.roles?.includes('admin') &&
             <Link
               className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-green-500 rounded shadow ripple hover:shadow-lg hover:bg-green-600 focus:outline-none"
               to="/admins"
