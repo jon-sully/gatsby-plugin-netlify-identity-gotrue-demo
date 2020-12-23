@@ -1,6 +1,7 @@
 [build]
   command = "gatsby build"
   publish = "public"
+  functions = "serverless"
 
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
