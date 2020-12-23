@@ -10,8 +10,7 @@ const AuthOverlay = () => {
   const { register, handleSubmit, errors } = useForm()
   const [formError, setFormError] = useState()
   const [formProcessing, setFormProcessing] = useState(false)
-  // const [forceShowOverlay, setForceShowOverlay] = useState(false)
-  const [forceShowOverlay, setForceShowOverlay] = useState("we're having issues with styles!")
+  const [forceShowOverlay, setForceShowOverlay] = useState(false)
 
   useEffect(() => {
     if (identity.provisionalUser) {
