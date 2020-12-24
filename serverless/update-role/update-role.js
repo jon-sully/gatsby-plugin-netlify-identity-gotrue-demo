@@ -8,9 +8,9 @@ exports.handler = async (event, context) => {
   const userUrl = `${identity.url}/admin/users/${user.sub}`
   const adminAuthorization = `Bearer ${identity.token}`
 
-  console.log(`Updating roles for ${user.email}: ${action} ${role}`)
-
   const currentRoles = user.app_metadata.roles || []
+  console.log(`Current roles: ${currentRoles}`)
+  console.log(`Action: ${action} ${role}`)
   const newRoles = action == 'add'
     ? currentRoles.concat(role)
     : currentRoles.filter(r => r !== role)
