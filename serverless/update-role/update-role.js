@@ -10,14 +10,16 @@ exports.handler = async (event, context) => {
 
   console.log(`Updating roles for ${user.email}: ${action} ${role}`)
 
-  // TODO: Make sure this doesn't error on totally new users (default roles is []?)
   const currentRoles = user.app_metadata.roles || []
+  const newRoles = action == 'add'
+    ? currentRoles.concat(role)
+    : currentRoles.filter(r => r !== role)
+  console.log(`New roles: ${newRoles}`)
+
   const payload = {
     app_metadata: {
       ...user.app_metadata,
-      roles: action == 'add'
-        ? currentRoles.concat(role)
-        : currentRoles.filter(r => r !== role)
+      roles: newRoles
     }
   }
 
