@@ -9,12 +9,9 @@ exports.handler = async (event, context) => {
   const adminAuthorization = `Bearer ${identity.token}`
 
   const currentRoles = user.app_metadata.roles || []
-  console.log(`Current roles: ${currentRoles}`)
-  console.log(`Action: ${action} ${role}`)
   const newRoles = action === 'add'
     ? currentRoles.concat(role)
     : currentRoles.filter(r => r !== role)
-  console.log(`New roles: ${newRoles}`)
 
   const payload = {
     app_metadata: {
@@ -23,10 +20,6 @@ exports.handler = async (event, context) => {
     }
   }
 
-  // console.log(`payload: ${JSON.stringify(payload)}`)
-  // console.log(`PUT'ing to ${userUrl}`)
-  // console.log(`Auth: ${adminAuthorization}`)
-
   await fetch(userUrl, {
     method: 'PUT',
     headers: {
@@ -34,8 +27,6 @@ exports.handler = async (event, context) => {
     },
     body: JSON.stringify(payload)
   })
-    // .then(resp => resp.json())
-    // .then(user => console.log(JSON.stringify(user)))
 
   return {
     statusCode: 200
