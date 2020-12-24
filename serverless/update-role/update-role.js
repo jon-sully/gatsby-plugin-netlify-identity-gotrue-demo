@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
   const currentRoles = user.app_metadata.roles || []
   console.log(`Current roles: ${currentRoles}`)
   console.log(`Action: ${action} ${role}`)
-  const newRoles = action == 'add'
+  const newRoles = action === 'add'
     ? currentRoles.concat(role)
     : currentRoles.filter(r => r !== role)
   console.log(`New roles: ${newRoles}`)
