@@ -32,4 +32,5 @@ The demo site itself is based on the Gatsby Tailwind Starter and leverages a sem
 [3]:https://github.com/netlify/netlify-identity-widget
 [4]:https://github.com/netlify-labs/react-netlify-identity
 [5]:https://github.com/netlify/gotrue-js
+
 [1]: https://github.com/jon-sully/gatsby-plugin-netlify-identity-gotrue
