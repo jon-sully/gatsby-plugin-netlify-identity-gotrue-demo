@@ -27,7 +27,7 @@ const MyAccount = () => {
     await identity.update({
       email: email,
       password: newPasswordOne && newPasswordTwo,
-      data: {
+      user_metadata: {
         full_name: fullName
       }
     })

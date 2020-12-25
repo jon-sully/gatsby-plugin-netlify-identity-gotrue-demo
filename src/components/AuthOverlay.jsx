@@ -15,7 +15,8 @@ const AuthOverlay = () => {
   useEffect(() => {
     if (identity.provisionalUser) {
       setForceShowOverlay('Please check your email for an account confirmation email!')
-      setTimeout(() => setForceShowOverlay(false), 5000)
+      const timeoutId = setTimeout(() => setForceShowOverlay(false), 5000)
+      return () => clearTimeout(timeoutId)
     }
   }, [identity.provisionalUser])
 
@@ -23,7 +24,9 @@ const AuthOverlay = () => {
     setFormProcessing(true)
     setFormError()
 
-    await identity.completeUrlTokenTwoStep(data)
+    const { password, ...rest } = data
+
+    await identity.completeUrlTokenTwoStep({ password, user_metadata: rest })
       .catch(_ => setFormError('Having an issue.. please try later'))
 
     setFormProcessing(false)
