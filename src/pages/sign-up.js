@@ -15,7 +15,7 @@ export default () => {
     setFormError(false)
 
     identity
-      .signup({ email: data.email, password: data.password, data: { full_name: data.fullName } })
+      .signup(data)
       .then(() => {
         setSigningUp(false)
         navigate('/')
@@ -28,6 +28,14 @@ export default () => {
 
   return (
     <Layout>
+      <div className="flex flex-col w-full items-center">
+        <p className="px-4 mt-8 text-xl text-gray-700 sm:mt-8 max-w-2xl">
+          This form is an example of Netlify Identity's ability to leverage custom data on users. Feel free
+          to sign up - it is fully functional, but do feel free to also put in fake information. While the
+          information entered here is secure and dumped into oblivion, the validations are a proof-of-functionality
+          and need not be heeded with legitimate data.
+        </p>
+      </div>
       <main className="max-w-2xl flex-grow mx-auto flex flex-col justify-around">
         <div className="sm:flex sm:flex-row-reverse sm:items-center">
           <div className="sm:px-2">
@@ -38,10 +46,11 @@ export default () => {
               <div className="w-full max-w-xs">
                 <p>You are already signed in</p>
               </div>
-              : <div className="w-full max-w-xs">
+              : <div className="w-full max-w-2xl">
                 <form className="pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
+
                   <div className="mb-4">
-                    <label htmlFor="fullName" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label htmlFor="user_metadata.full_name" className="block text-gray-700 text-sm font-bold mb-2">
                       Full Name
                     </label>
                     <input
@@ -49,10 +58,81 @@ export default () => {
                       className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${signingUp && 'disabled'}`}
                       type="text"
                       placeholder="Johnny Appleseed"
-                      name="fullName">
+                      name="user_metadata.full_name">
                     </input>
-                    {errors.fullName && <p className="text-red-500 text-xs italic">Name is required</p>}
+                    {errors.user_metadata?.full_name && <p className="text-red-500 text-xs italic">Name is required</p>}
                   </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="user_metadata.phone_number" className="block text-gray-700 text-sm font-bold mb-2">
+                      Phone Number
+                    </label>
+                    <input
+                      ref={register({ pattern: /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/ })}
+                      className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${signingUp && 'disabled'}`}
+                      type="text"
+                      placeholder="800-500-2323"
+                      name="user_metadata.phone_number">
+                    </input>
+                    {errors.user_metadata?.phone_number && <p className="text-red-500 text-xs italic">Phone number not required, but must be formatted correctly: 123-123-1234</p>}
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="user_metadata.address.street" className="block text-gray-700 text-sm font-bold mb-2">
+                      Street
+                    </label>
+                    <input
+                      ref={register({ required: true })}
+                      className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${signingUp && 'disabled'}`}
+                      type="text"
+                      placeholder="123 Main St."
+                      name="user_metadata.address.street">
+                    </input>
+                    {errors.user_metadata?.address.street && <p className="text-red-500 text-xs italic">Address Required</p>}
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="user_metadata.address.city" className="block text-gray-700 text-sm font-bold mb-2">
+                      City
+                    </label>
+                    <input
+                      ref={register({ required: true })}
+                      className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${signingUp && 'disabled'}`}
+                      type="text"
+                      placeholder="Columbus"
+                      name="user_metadata.address.city">
+                    </input>
+                    {errors.user_metadata?.address.city && <p className="text-red-500 text-xs italic">City Required</p>}
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="user_metadata.address.state" className="block text-gray-700 text-sm font-bold mb-2">
+                      State
+                    </label>
+                    <input
+                      ref={register({ required: true })}
+                      className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${signingUp && 'disabled'}`}
+                      type="text"
+                      placeholder="OH"
+                      name="user_metadata.address.state">
+                    </input>
+                    {errors.user_metadata?.address.state && <p className="text-red-500 text-xs italic">State Required</p>}
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="user_metadata.address.zip" className="block text-gray-700 text-sm font-bold mb-2">
+                      Zip Code
+                    </label>
+                    <input
+                      ref={register({ required: true })}
+                      className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${signingUp && 'disabled'}`}
+                      type="text"
+                      placeholder="43081"
+                      name="user_metadata.address.zip">
+                    </input>
+                    {errors.user_metadata?.address.zip && <p className="text-red-500 text-xs italic">Zip code Required</p>}
+                  </div>
+
                   <div className="mb-4">
                     <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
                       Email
@@ -64,8 +144,9 @@ export default () => {
                       placeholder="johnny@apple.com"
                       name="email">
                     </input>
-                    {errors.email && <p className="text-red-500 text-xs italic">Email is required</p>}
+                    {errors.email && <p className="text-red-500 text-xs italic">Email is required, use correct format</p>}
                   </div>
+
                   <div className="mb-6">
                     <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
                       Password
@@ -79,6 +160,7 @@ export default () => {
                     </input>
                     {errors.password && <p className="text-red-500 text-xs italic">Password is required</p>}
                   </div>
+
                   <div className="flex items-center justify-between">
                     <button
                       className={`bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${signingUp && 'opacity-50 cursor-not-allowed'}`}
@@ -86,6 +168,7 @@ export default () => {
                       Sign Up
                     </button>
                   </div>
+
                   <div className="pt-2">
                     {formError && <p className="text-red-500 text-xs italic">That didn't seem to work right!</p>}
                   </div>

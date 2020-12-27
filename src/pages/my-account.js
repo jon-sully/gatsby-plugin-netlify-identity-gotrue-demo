@@ -21,16 +21,10 @@ const MyAccount = () => {
   const [formProcessing, setFormProcessing] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
 
-  const onSubmit = async ({ fullName, email, newPasswordOne, newPasswordTwo }) => {
+  const onSubmit = async (data) => {
     setFormProcessing(true)
 
-    await identity.update({
-      email: email,
-      password: newPasswordOne && newPasswordTwo,
-      user_metadata: {
-        full_name: fullName
-      }
-    })
+    await identity.update(data)
 
     setValue('newPasswordOne', '')
     setValue('newPasswordTwo', '')
@@ -41,8 +35,13 @@ const MyAccount = () => {
 
   useEffect(() => {
     setValue('email', identity.user.email)
-    setValue('fullName', identity.user.user_metadata?.full_name)
-  }, [identity.user, identity.user.email, setValue])
+    setValue('user_metadata.full_name', identity.user?.user_metadata?.full_name)
+    setValue('user_metadata.phone_number', identity.user?.user_metadata?.phone_number)
+    setValue('user_metadata.address.street', identity.user?.user_metadata?.address?.street)
+    setValue('user_metadata.address.city', identity.user?.user_metadata?.address?.city)
+    setValue('user_metadata.address.state', identity.user?.user_metadata?.address?.state)
+    setValue('user_metadata.address.zip', identity.user?.user_metadata?.address?.zip)
+  }, [identity.user, setValue])
 
   return (
     <main className="max-w-2xl flex-grow mx-auto flex flex-col justify-around">
@@ -55,17 +54,95 @@ const MyAccount = () => {
             Feel free to change any of your account information here. Only changes you make will apply
           </p>
           <form className="pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
+
             <div className="mb-4">
-              <label htmlFor="fullName" className="block text-gray-700 text-sm font-bold mb-2">
+              <label htmlFor="user_metadata.full_name" className="block text-gray-700 text-sm font-bold mb-2">
                 Full Name
               </label>
               <input
-                ref={register()}
-                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formProcessing && 'opacity-75'}`}
-                disabled={formProcessing}
+                ref={register({ required: true })}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                 type="text"
-                name="fullName">
+                disabled={formProcessing}
+                placeholder="Johnny Appleseed"
+                name="user_metadata.full_name">
               </input>
+              {errors.user_metadata?.full_name && <p className="text-red-500 text-xs italic">Name is required</p>}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="user_metadata.phone_number" className="block text-gray-700 text-sm font-bold mb-2">
+                Phone Number
+              </label>
+              <input
+                ref={register({ pattern: /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/ })}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                type="text"
+                disabled={formProcessing}
+                placeholder="800-500-2323"
+                name="user_metadata.phone_number">
+              </input>
+              {errors.user_metadata?.phone_number && <p className="text-red-500 text-xs italic">Phone number not required, but must be formatted correctly: 123-123-1234</p>}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="user_metadata.address.street" className="block text-gray-700 text-sm font-bold mb-2">
+                Street
+              </label>
+              <input
+                ref={register({ required: true })}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                type="text"
+                disabled={formProcessing}
+                placeholder="123 Main St."
+                name="user_metadata.address.street">
+              </input>
+              {errors.user_metadata?.address.street && <p className="text-red-500 text-xs italic">Address Required</p>}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="user_metadata.address.city" className="block text-gray-700 text-sm font-bold mb-2">
+                City
+              </label>
+              <input
+                ref={register({ required: true })}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                type="text"
+                disabled={formProcessing}
+                placeholder="Columbus"
+                name="user_metadata.address.city">
+              </input>
+              {errors.user_metadata?.address.city && <p className="text-red-500 text-xs italic">City Required</p>}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="user_metadata.address.state" className="block text-gray-700 text-sm font-bold mb-2">
+                State
+              </label>
+              <input
+                ref={register({ required: true })}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                type="text"
+                disabled={formProcessing}
+                placeholder="OH"
+                name="user_metadata.address.state">
+              </input>
+              {errors.user_metadata?.address.state && <p className="text-red-500 text-xs italic">State Required</p>}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="user_metadata.address.zip" className="block text-gray-700 text-sm font-bold mb-2">
+                Zip Code
+              </label>
+              <input
+                ref={register({ required: true })}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                type="text"
+                disabled={formProcessing}
+                placeholder="43081"
+                name="user_metadata.address.zip">
+              </input>
+              {errors.user_metadata?.address.zip && <p className="text-red-500 text-xs italic">Zip code Required</p>}
             </div>
 
             <div className="mb-4">
@@ -73,42 +150,43 @@ const MyAccount = () => {
                 Email
               </label>
               <input
-                ref={register({ pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
+                ref={register({ required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
                 className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formProcessing && 'opacity-75'}`}
                 disabled={formProcessing || identity.pendingEmailUpdate}
                 type="text"
                 name="email">
               </input>
               {identity.pendingEmailUpdate && <p className="text-red-500 text-xs italic">Pending email update to {identity.pendingEmailUpdate}; please check your inbox</p>}
+              {errors.email && <p className="text-red-500 text-xs italic">Email is required, use correct format</p>}
             </div>
 
-            <div className="mb-6">
-              <label htmlFor="newPasswordOne" className="block text-gray-700 text-sm font-bold mb-2">
+            <div className="mb-4">
+              <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
                 New Password
               </label>
               <input
                 ref={register()}
                 className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formProcessing && 'opacity-75'}`}
                 disabled={formProcessing}
-                name="newPasswordOne"
+                name="password"
                 type="password"
                 placeholder="******************">
               </input>
-              {errors.newPasswordOne && <p className="text-red-500 text-xs italic">Password is required</p>}
             </div>
+
             <div className="mb-6">
-              <label htmlFor="newPasswordTwo" className="block text-gray-700 text-sm font-bold mb-2">
+              <label htmlFor="confirmPassword" className="block text-gray-700 text-sm font-bold mb-2">
                 New Password (Repeat)
               </label>
               <input
-                ref={register({ validate: value => value === watch('newPasswordOne') })}
+                ref={register({ validate: value => value === watch('password') })}
                 className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formProcessing && 'opacity-75'}`}
                 disabled={formProcessing}
-                name="newPasswordTwo"
+                name="confirmPassword"
                 type="password"
                 placeholder="******************">
               </input>
-              {errors.newPasswordTwo && <p className="text-red-500 text-xs italic">Passwords Must Match</p>}
+              {errors.confirmPassword && <p className="text-red-500 text-xs italic">Passwords Must Match</p>}
             </div>
 
 

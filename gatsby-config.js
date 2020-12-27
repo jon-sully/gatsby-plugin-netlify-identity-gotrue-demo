@@ -15,7 +15,7 @@ module.exports = {
       resolve: "gatsby-plugin-manifest",
       options: {
         name: "Gatsby Plugin Netlify Identity GoTrue Demo",
-        short_name: "Gatsby-Id-Demo",
+        short_name: "Gatsby-Identity-Demo",
         start_url: "/",
         background_color: theme.colors.white,
         theme_color: theme.colors.teal[500],
@@ -31,7 +31,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-netlify-identity-gotrue',
       options: {
-        url: 'https://gatsby-id-demo.jonsully.net'
+        url: 'https://gatsby-identity-demo.jonsully.net'
       }
     }
   ],
