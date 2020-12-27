@@ -1,4 +1,4 @@
-# Gatsby Plugin Netlify Identity GoTrue Demo
+# gatsby-plugin-netlify-identity-gotrue Demo
 
 ### See it in action! ✨ https://gatsby-identity-demo.jonsully.net ✨
 
