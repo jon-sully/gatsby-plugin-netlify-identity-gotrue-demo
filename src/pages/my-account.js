@@ -39,11 +39,10 @@ const MyAccount = () => {
     setTimeout(() => (setFormSubmitted(false)), 2000)
   }
 
-  const emailUpdatePending = identity.user.new_email && (identity.user.email !== identity.user.new_email)
   useEffect(() => {
     setValue('email', identity.user.email)
     setValue('fullName', identity.user.user_metadata?.full_name)
-  }, [identity.user, identity.user.email, identity.user.new_email, setValue])
+  }, [identity.user, identity.user.email, setValue])
 
   return (
     <main className="max-w-2xl flex-grow mx-auto flex flex-col justify-around">
@@ -76,11 +75,11 @@ const MyAccount = () => {
               <input
                 ref={register({ pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
                 className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formProcessing && 'opacity-75'}`}
-                disabled={formProcessing || emailUpdatePending}
+                disabled={formProcessing || identity.pendingEmailUpdate}
                 type="text"
                 name="email">
               </input>
-              {emailUpdatePending && <p className="text-red-500 text-xs italic">Pending email update to {identity.user.new_email}; please check your inbox</p>}
+              {identity.pendingEmailUpdate && <p className="text-red-500 text-xs italic">Pending email update to {identity.pendingEmailUpdate}; please check your inbox</p>}
             </div>
 
             <div className="mb-6">

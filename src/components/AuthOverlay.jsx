@@ -31,17 +31,17 @@ const AuthOverlay = () => {
 
     setFormProcessing(false)
   }
-  
+
   return (
     <>
       {(identity.urlToken || forceShowOverlay) &&
         <div className="w-full h-full fixed block top-0 left-0 bg-gray-200 bg-opacity-75 z-50 flex justify-center items-center">
           <div className="w-full p-4 max-w-xs opacity-100 bg-white shadow-xl rounded-lg">
 
-          {identity.urlToken?.type === "confirmation" &&
+            {identity.urlToken?.type === "confirmation" &&
               <p>Confirming User...</p>
             }
-          {identity.urlToken?.type === "email_change" && (
+            {identity.urlToken?.type === "email_change" && (
               identity.user
                 ? <p>Changing Email...</p>
                 : <>
@@ -49,12 +49,14 @@ const AuthOverlay = () => {
                   <LoginForm />
                 </>
             )}
-          {forceShowOverlay &&
-            <p>{forceShowOverlay}</p>
-          }
-          {(identity.urlToken?.type === "recovery" || identity.urlToken?.type === "invite") &&
+            {forceShowOverlay &&
+              <p>{forceShowOverlay}</p>
+            }
+            {(identity.urlToken?.type === "passwordRecovery" || identity.urlToken?.type === "invite") &&
               <>
-                {identity.urlToken.type === "recovery" && <h2>Reset Password</h2>}
+                {identity.urlToken.type === "passwordRecovery" &&
+                  <h2>Reset Password</h2>
+                }
                 {identity.urlToken.type === "invite" &&
                   <>
                     <h2>Welcome</h2>
