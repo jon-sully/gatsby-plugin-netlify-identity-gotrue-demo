@@ -17,12 +17,15 @@ Here are a few features this site implements to prove out a fully working use-ca
   - Any request made to a Netlify Function can be made with `identity.authorizedFetch` (a small wrapper around `fetch`) in order to gain `clientContext` in the Function (an automatic and secure way to guarantee that the User calling the Function is who they say they are)!
 - Built-in PrivateContent guarding and callback behavior without complex client-side routing
   - The [src/components/PrivateContent.jsx](src/components/PrivateContent.jsx) and [src/components/LoginForm.jsx](src/components/LoginForm.jsx) components work together to provide a fantastic user experience for ensuring that content is only viewable by those with permissions to see it! Adding authorized Functions to the mix means tons of flexibility for safe-guarding content and tools to _only_ those who should be able to access them
+- Expressive, definable freedom for values set by/on each user
+  - The `user` object used across Netlify Identity and [`gatsby-plugin-netlify-identity-gotrue`][1] are flexible and can include all sorts of custom data. This demo displays those capabilities by having a user's phone number and address be part of the `user` object, but we can put anything we'd like in there.
+  - Do remember that any data the `user` object contains _can_ ultimately be seen my the client - that which is in `user_metadata` can be _edited_ by the client directly (conveniently via [`gatsby-plugin-netlify-identity-gotrue`][1], I might add) and that which is in `app_metadata` can only be edited via an Authorized Function (similar to how the user `roles` are edited by this demo's Functions) or from the Netlify Admin UI (which only exposes `roles` for editing anyway)
 
 And much more! Play around on the site and then give the code a read to understand how the `identity` API provides fully-featured Auth with simplified Gatsby code 😁
 
 ---
 
-The demo site itself is based on the Gatsby Tailwind Starter and leverages a semi-transparent overlay to coerce the user into completing a few key auth steps (like when they click the "Reset your password" link from email - they need to reset their password before doing anything else) but this could be accomplished using Gatsby `navigate` or otherwise rather than an overlay too. 
+The demo site itself is based on the Gatsby Tailwind Starter and leverages a semi-transparent overlay to coerce the user into completing a few key auth steps (like when they click the "Reset your password" link from email - they need to reset their password before doing anything else) but this could be accomplished using Gatsby `navigate` or other methods. [`gatsby-plugin-netlify-identity-gotrue`][1] does _not_ enforce, imply, or encourage any particular _display_ layer. It remains un-opinionated and doesn't contain any display logic to begin with.
 
 ---
 
