@@ -1,10 +1,12 @@
 # Gatsby Plugin Netlify Identity GoTrue Demo
 
-### See it in action! ✨ https://gatsby-id-demo.jonsully.net ✨
+### See it in action! ✨ https://gatsby-identity-demo.jonsully.net ✨
+
+Demo site status: [![Netlify Status](https://api.netlify.com/api/v1/badges/5aa804c6-93d0-46cb-8091-e7de647c6372/deploy-status)](https://app.netlify.com/sites/gatsby-plugin-netlify-identity-gotrue-demo/deploys)
 
 ---
 
-This repository is the source behind https://gatsby-id-demo.jonsully.net - a demo website that shows off the deep integration possibilities behind using Netlify Identity with [`gatsby-plugin-netlify-identity-gotrue`][1]. For documentation on the `identity` API used throughout this application, see [`react-netlify-identity-gotrue`][2] - the underlying library that [`gatsby-plugin-netlify-identity-gotrue`][1] just wraps to add Gatsby-specific bindings.
+This repository is the source behind https://gatsby-identity-demo.jonsully.net - a demo website that shows off the deep integration possibilities behind using Netlify Identity with [`gatsby-plugin-netlify-identity-gotrue`][1]. For documentation on the `identity` API used throughout this application, see [`react-netlify-identity-gotrue`][2] - the underlying library that [`gatsby-plugin-netlify-identity-gotrue`][1] just wraps to add Gatsby-specific bindings.
 
 Here are a few features this site implements to prove out a fully working use-case of an expressive Identity suite:
 
