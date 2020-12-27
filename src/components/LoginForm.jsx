@@ -78,12 +78,12 @@ export default function LoginForm({ navigateTarget }) {
                 type="submit">
                 Sign In
            </button>
-              <Link className="inline-block align-baseline font-bold text-sm text-blue-700 hover:text-blue-800" to="/forgot-password">
+              <Link className="inline-block align-baseline font-bold text-sm text-blue-700 hover:text-blue-800 ml-2" to="/forgot-password">
                 Forgot Password?
             </Link>
             </div>
             <div className="pt-2">
-              {formError && <p className="text-red-500 text-xs italic">That combo didn't seem to work.</p>}
+              {formError && <p className="text-red-500 text-xs italic">{formError}</p>}
             </div>
           </form>
         </div>

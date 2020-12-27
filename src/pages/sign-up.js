@@ -20,7 +20,10 @@ export default () => {
         setSigningUp(false)
         navigate('/')
       })
-      .catch(e => setFormError(e.message))
+      .catch(e => {
+        setFormError(e.message)
+        setSigningUp(false)
+      })
   }
 
   return (
