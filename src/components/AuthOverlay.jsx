@@ -24,9 +24,7 @@ const AuthOverlay = () => {
     setFormProcessing(true)
     setFormError()
 
-    const { password, ...rest } = data
-
-    await identity.completeUrlTokenTwoStep({ password, user_metadata: rest })
+    await identity.completeUrlTokenTwoStep(data)
       .catch(_ => setFormError('Having an issue.. please try later'))
 
     setFormProcessing(false)
@@ -66,14 +64,14 @@ const AuthOverlay = () => {
                 <form className="pt-6" onSubmit={handleSubmit(onSubmit)}>
                   {identity.urlToken.type === "invite" &&
                     <div className="mb-2">
-                      <label htmlFor="full_name" className="block text-gray-700 text-sm font-bold mb-2">
+                      <label htmlFor="user_metadata.full_name" className="block text-gray-700 text-sm font-bold mb-2">
                         Name
                       </label>
                       <input
                         ref={register({ required: true })}
                         className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline ${formProcessing && 'opacity-75'}`}
                         disabled={formProcessing}
-                        name="full_name"
+                        name="user_metadata.full_name"
                         type="text"
                         placeholder="Jane Doe">
                       </input>
