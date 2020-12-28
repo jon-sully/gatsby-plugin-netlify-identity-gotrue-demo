@@ -33,6 +33,18 @@ const MyAccount = () => {
     setTimeout(() => (setFormSubmitted(false)), 2000)
   }
 
+  const reSendEmailChangeConfirmation = async () => {
+    if (!identity.pendingEmailUpdate || formProcessing) return
+
+    setFormProcessing(true)
+
+    await identity.update({ email: identity.pendingEmailUpdate })
+
+    setFormProcessing(false)
+    setFormSubmitted(true)
+    setTimeout(() => (setFormSubmitted(false)), 2000)
+  }
+
   useEffect(() => {
     setValue('email', identity.user.email)
     setValue('user_metadata.full_name', identity.user?.user_metadata?.full_name)
@@ -152,11 +164,11 @@ const MyAccount = () => {
               <input
                 ref={register({ required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
                 className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${formProcessing && 'opacity-75'}`}
-                disabled={formProcessing || identity.pendingEmailUpdate}
+                disabled={formProcessing}
                 type="text"
                 name="email">
               </input>
-              {identity.pendingEmailUpdate && <p className="text-red-500 text-xs italic">Pending email update to {identity.pendingEmailUpdate}; please check your inbox</p>}
+              {identity.pendingEmailUpdate && <p className="text-red-500 text-xs italic">Pending email update to {identity.pendingEmailUpdate}; please check your inbox or <a className="text-blue-500 underline" onClick={reSendEmailChangeConfirmation}>resend confirmation</a>. </p>}
               {errors.email && <p className="text-red-500 text-xs italic">Email is required, use correct format</p>}
             </div>
 
