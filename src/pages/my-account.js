@@ -9,7 +9,7 @@ export default () => {
     <Layout>
       <PrivateContent
         as={MyAccount}
-        callbackPath="/my-account"
+        callbackPath="/my-account/"
       />
     </Layout>
   )
