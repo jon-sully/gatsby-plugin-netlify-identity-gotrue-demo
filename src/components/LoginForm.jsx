@@ -77,10 +77,10 @@ export default function LoginForm({ navigateTarget }) {
                 className={`bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${loggingIn && 'opacity-50 cursor-not-allowed'}`}
                 type="submit">
                 Sign In
-           </button>
-              <Link className="inline-block align-baseline font-bold text-sm text-blue-700 hover:text-blue-800 ml-2" to="/forgot-password">
+              </button>
+              <Link className="inline-block align-baseline font-bold text-sm text-blue-700 hover:text-blue-800 ml-2" to="/forgot-password/">
                 Forgot Password?
-            </Link>
+              </Link>
             </div>
             <div className="pt-2">
               {formError && <p className="text-red-500 text-xs italic">{formError}</p>}

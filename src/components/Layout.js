@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
             {!(identity.user || identity.provisionalUser) &&
               <Link
                 className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
-                to="/sign-up"
+                to="/sign-up/"
               >
                 Sign Up
               </Link>
@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
               <>
                 <Link
                   className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
-                  to="/my-account"
+                  to="/my-account/"
                 >
                   My Account
                 </Link>
@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
               </>
               : <Link
                 className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
-                to="/login"
+                to="/login/"
               >
                 Log In
               </Link>
@@ -69,7 +69,7 @@ const Layout = ({ children }) => {
           {identity.user?.app_metadata?.roles?.includes('member') &&
             <Link
               className="inline-block px-6 py-2 mr-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-green-500 rounded shadow ripple hover:shadow-lg hover:bg-green-600 focus:outline-none"
-              to="/members"
+              to="/members/"
             >
               Members Dashboard
             </Link>
@@ -77,7 +77,7 @@ const Layout = ({ children }) => {
           {identity.user?.app_metadata?.roles?.includes('admin') &&
             <Link
               className="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-green-500 rounded shadow ripple hover:shadow-lg hover:bg-green-600 focus:outline-none"
-              to="/admins"
+              to="/admins/"
             >
               Admins Dashboard
             </Link>
