@@ -33,6 +33,12 @@ module.exports = {
       options: {
         url: 'https://gatsby-identity-demo.jonsully.net'
       }
+    },
+    {
+      resolve: `gatsby-plugin-force-trailing-slashes`,
+      options: {
+        excludedPaths: [`/404.html`],
+      },
     }
   ],
 }
