@@ -88,7 +88,7 @@ export default () => {
                       placeholder="123 Main St."
                       name="user_metadata.address.street">
                     </input>
-                    {errors.user_metadata?.address.street && <p className="text-red-500 text-xs italic">Address Required</p>}
+                    {errors.user_metadata?.address?.street && <p className="text-red-500 text-xs italic">Address Required</p>}
                   </div>
 
                   <div className="mb-4">
@@ -102,7 +102,7 @@ export default () => {
                       placeholder="Columbus"
                       name="user_metadata.address.city">
                     </input>
-                    {errors.user_metadata?.address.city && <p className="text-red-500 text-xs italic">City Required</p>}
+                    {errors.user_metadata?.address?.city && <p className="text-red-500 text-xs italic">City Required</p>}
                   </div>
 
                   <div className="mb-4">
@@ -116,7 +116,7 @@ export default () => {
                       placeholder="OH"
                       name="user_metadata.address.state">
                     </input>
-                    {errors.user_metadata?.address.state && <p className="text-red-500 text-xs italic">State Required</p>}
+                    {errors.user_metadata?.address?.state && <p className="text-red-500 text-xs italic">State Required</p>}
                   </div>
 
                   <div className="mb-4">
@@ -130,7 +130,7 @@ export default () => {
                       placeholder="43081"
                       name="user_metadata.address.zip">
                     </input>
-                    {errors.user_metadata?.address.zip && <p className="text-red-500 text-xs italic">Zip code Required</p>}
+                    {errors.user_metadata?.address?.zip && <p className="text-red-500 text-xs italic">Zip code Required</p>}
                   </div>
 
                   <div className="mb-4">
