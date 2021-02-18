@@ -5236,12 +5236,12 @@ gatsby-plugin-manifest@^2.4.1:
     semver "^7.3.2"
     sharp "^0.26.3"
 
-gatsby-plugin-netlify-identity-gotrue@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify-identity-gotrue/-/gatsby-plugin-netlify-identity-gotrue-0.3.3.tgz#b680cbcccc5ab2d9160043d6ab21b6f16354f1ff"
-  integrity sha512-KHMgHXU9q0Waj6YTx3vVBZmKX0JgW17skLPk1SxmlVz9rpXwPz4HSzZYj9Y7LLM2CVB74WUfK09G+PPRdqlrIw==
+gatsby-plugin-netlify-identity-gotrue@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify-identity-gotrue/-/gatsby-plugin-netlify-identity-gotrue-0.3.4.tgz#6add77f6929259bc9e0f4744893e75246de2393f"
+  integrity sha512-2Y6Yip2GXRJQPeo/HBCifFqjjHBQoW8NGbD5BA+rHVWYaiAvjE7iGRpQjjQQafdbJ75kNL7hElW/FeuwR+1Irw==
   dependencies:
-    react-netlify-identity-gotrue "^0.3.3"
+    react-netlify-identity-gotrue "^0.3.4"
 
 gatsby-plugin-page-creator@^2.7.1:
   version "2.7.1"
@@ -9486,10 +9486,10 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-netlify-identity-gotrue@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/react-netlify-identity-gotrue/-/react-netlify-identity-gotrue-0.3.3.tgz#b545fb844cef406a1c918555321250759c4bfbfa"
-  integrity sha512-QmV3AFnLXmpQfCDAOIi2bBG6SWnXUhBpc1FQ0EC4rcDK+kLpOyZCaSnEJlhpQAagjLJzxn+PQwBbjXkVH+7KNw==
+react-netlify-identity-gotrue@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/react-netlify-identity-gotrue/-/react-netlify-identity-gotrue-0.3.4.tgz#5eddb44112f9556f2865d1c6c35566f38006effa"
+  integrity sha512-I1dBWvVY1QfAITjGmg3NB2qiSzFZRgUJQ2nJfNaflvxziOf7gp65W19ZrqrkBmp1XsVebU/V6pGPtJ1fhREopA==
 
 react-refresh@^0.8.3:
   version "0.8.3"
