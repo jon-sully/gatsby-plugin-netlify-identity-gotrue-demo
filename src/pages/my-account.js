@@ -20,6 +20,7 @@ const MyAccount = () => {
   const { register, handleSubmit, errors, watch, setValue } = useForm()
   const [formProcessing, setFormProcessing] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [formError, setFormError] = useState()
 
   const onSubmit = async (data) => {
     setFormProcessing(true)
@@ -35,6 +36,7 @@ const MyAccount = () => {
       .catch(e => {
         setFormProcessing(false)
         setFormError(e.message)
+        setTimeout(() => (setFormError()), 5000)
         return
     })
   }
@@ -218,6 +220,7 @@ const MyAccount = () => {
             </div>
             <div>
               {formSubmitted && <p className="text-green-500 text-xs italic">Update Complete</p>}
+              {formError && <p className="text-red-500 text-xs italic">{formError}</p>}
             </div>
           </form>
         </div>
