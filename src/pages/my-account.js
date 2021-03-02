@@ -25,12 +25,18 @@ const MyAccount = () => {
     setFormProcessing(true)
 
     await identity.update(data)
-
-    setValue('newPasswordOne', '')
-    setValue('newPasswordTwo', '')
-    setFormProcessing(false)
-    setFormSubmitted(true)
-    setTimeout(() => (setFormSubmitted(false)), 2000)
+      .then(_ => {
+        setValue('newPasswordOne', '')
+        setValue('newPasswordTwo', '')
+        setFormProcessing(false)
+        setFormSubmitted(true)
+        setTimeout(() => (setFormSubmitted(false)), 2000)
+      })
+      .catch(e => {
+        setFormProcessing(false)
+        setFormError(e.message)
+        return
+    })
   }
 
   const reSendEmailChangeConfirmation = async () => {
